@@ -1,0 +1,100 @@
+.about-view {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px 28px;
+}
+
+.about-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--mat-sys-primary);
+  font: var(--mat-sys-label-large);
+}
+
+h2 {
+  margin: 0;
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-headline-medium);
+}
+
+small {
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-body-medium);
+}
+
+.spectral-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.spectral-orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--star-color) 72%, #ffffff);
+  border-radius: 50%;
+  appearance: none;
+  background:
+    radial-gradient(circle at 35% 30%, #ffffff 0 8%, var(--star-color) 24%, color-mix(in srgb, var(--star-color) 58%, #000000) 70%, #121212 100%);
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--star-color) 68%, transparent),
+    0 8px 24px color-mix(in srgb, var(--star-color) 26%, transparent),
+    inset -12px -14px 24px color-mix(in srgb, #000000 28%, transparent);
+  color: #10131a;
+  cursor: pointer;
+  font: var(--mat-sys-headline-small);
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.spectral-orb::before {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--star-color) 38%, transparent), transparent 68%);
+  content: '';
+  z-index: -1;
+}
+
+.spectral-orb:hover,
+.spectral-orb:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 0 34px color-mix(in srgb, var(--star-color) 80%, transparent),
+    0 12px 30px color-mix(in srgb, var(--star-color) 34%, transparent),
+    inset -12px -14px 24px color-mix(in srgb, #000000 28%, transparent);
+}
+
+.spectral-orb:focus-visible {
+  outline: 3px solid var(--mat-sys-primary);
+  outline-offset: 5px;
+}
+
+@media (max-width: 640px) {
+  .about-view {
+    padding: 22px 18px;
+  }
+
+  .spectral-row {
+    gap: 14px;
+  }
+
+  .spectral-orb {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,1 +1,21 @@
-<h1>About</h1>
+<section class="about-view">
+  <div class="about-header">
+    <p class="eyebrow">Stellar classification</p>
+    <h2>What is Spectrum?</h2>
+    <small>Oh Be A Fine Girl, Kiss Me</small>
+  </div>
+
+  <div class="spectral-row" aria-label="Spectral classes O B A F G K M">
+    @for (type of spectralTypes; track type.letter) {
+      <button
+        type="button"
+        class="spectral-orb"
+        [style.--star-color]="type.color"
+        [attr.aria-label]="type.letter + ' spectral type'"
+        (click)="openSpectralType(type)"
+      >
+        {{ type.letter }}
+      </button>
+    }
+  </div>
+</section>
