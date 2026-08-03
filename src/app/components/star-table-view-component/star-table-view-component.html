@@ -1,0 +1,99 @@
+<section class="stars-view">
+  <div class="view-header">
+    <div>
+      <p class="eyebrow">HYG Stellar Database</p>
+      <h2>500 brightest stars</h2>
+    </div>
+
+    <div class="summary" aria-label="Catalog summary">
+      <div>
+        <span>{{ stars().length }}</span>
+        <small>stars</small>
+      </div>
+      <div>
+        <span>{{ brightest()?.apparentMagnitude ?? '-' }}</span>
+        <small>brightest mag</small>
+      </div>
+      <div>
+        <span>{{ faintest()?.apparentMagnitude ?? '-' }}</span>
+        <small>faintest mag</small>
+      </div>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state">Loading star catalog...</div>
+  } @else if (errorMessage()) {
+    <div class="state error">{{ errorMessage() }}</div>
+  } @else {
+    <div class="table-panel">
+      <div class="table-shell">
+        <table mat-table [dataSource]="dataSource" class="stars-table">
+          <ng-container matColumnDef="rank">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let star; let index = index">{{ rowNumber(index) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let star">
+              <div class="star-name">{{ star.name }}</div>
+              <div class="muted">{{ star.bayerFlamsteed || star.constellation || 'No designation' }}</div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="catalogs">
+            <th mat-header-cell *matHeaderCellDef>Catalog IDs</th>
+            <td mat-cell *matCellDef="let star">{{ catalogLabel(star) }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="spectralType">
+            <th mat-header-cell *matHeaderCellDef>Spectrum</th>
+            <td mat-cell *matCellDef="let star">{{ star.spectralType || '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="apparentMagnitude">
+            <th mat-header-cell *matHeaderCellDef>V mag</th>
+            <td mat-cell *matCellDef="let star">{{ star.apparentMagnitude | number: '1.2-2' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="absoluteMagnitude">
+            <th mat-header-cell *matHeaderCellDef>Abs. mag</th>
+            <td mat-cell *matCellDef="let star">{{ star.absoluteMagnitude ?? '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="colorIndex">
+            <th mat-header-cell *matHeaderCellDef>B-V</th>
+            <td mat-cell *matCellDef="let star">{{ star.colorIndex ?? '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="temperatureK">
+            <th mat-header-cell *matHeaderCellDef>Temp. K</th>
+            <td mat-cell *matCellDef="let star">{{ star.temperatureK ? (star.temperatureK | number: '1.0-0') : '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="luminosity">
+            <th mat-header-cell *matHeaderCellDef>Lum.</th>
+            <td mat-cell *matCellDef="let star">{{ star.luminosity ?? '-' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="distanceParsec">
+            <th mat-header-cell *matHeaderCellDef>Distance pc</th>
+            <td mat-cell *matCellDef="let star">{{ star.distanceParsec | number: '1.1-1' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [length]="stars().length"
+        [pageSize]="25"
+        [pageSizeOptions]="[10, 25, 50, 100, 500]"
+        showFirstLastButtons
+        aria-label="Select stars page"
+      ></mat-paginator>
+    </div>
+  }
+</section>
