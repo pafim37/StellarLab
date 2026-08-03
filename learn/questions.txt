@@ -1,0 +1,10 @@
+* angular cli commands
+  ng new my-new-project
+  ng serve - start application
+  ng g c my-generated-component
+
+* [N] What is Server Side rendering (SSr) while using ng new StellarLab
+
+* What does `caret` (^) mean in package.json
+
+Pozwoli na instalacje wyższej wersji Minor oraz Patch, ale nie pozwoli zainstalować wersji Major

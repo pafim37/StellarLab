@@ -1,0 +1,8 @@
+#1 new project was created using `ng new StellarLab`
+
+#2 electron was introduced 
+    - installed electron using `npm install --save=dev electron concurrently wait-on
+    - created electron\main.cjs
+    - added scripts like electron:dev to package.json (use: npm run electron:dev)
+
+
